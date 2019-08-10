@@ -12,7 +12,7 @@ ADD save-attachments.sh /opt/save-attachments.sh
 # install packages
 RUN rm /etc/dpkg/dpkg.cfg.d/excludes \
     && apt-get update \
-    && apt-get install -y libterm-readline-gnu-perl fetchmail maildrop mpack \
+    && apt-get install -y libterm-readline-gnu-perl fetchmail maildrop ripmime \
     && apt-get clean && rm -fr /var/lib/apt/lists/*
 
 RUN maildirmake /var/mail/working \

@@ -21,7 +21,7 @@ do
 	mkdir -p $MAILDIR/extracted/$i
 	mv $i $MAILDIR/extracted/$i/
 
-	munpack -C $MAILDIR/extracted/$i -q $MAILDIR/extracted/$i/$i
+	ripmime -q --no-nameless -d $MAILDIR/extracted/$i -i $MAILDIR/extracted/$i/$i
 
 	if [ -f /config/custom-handler ]; then
 		# allow custom handler script to do something here
@@ -35,11 +35,9 @@ do
 	MSGTIME=$(date --date="$MSGTIMESTAMP" '+%H%M%S')
 	mkdir -p $DESTINATION/$MSGDATE/$MSGTIME
 	rm $MAILDIR/extracted/$i/$i
-	for z in $MAILDIR/extracted/$i/*
-	do
-		cp -v --no-preserve=mode,ownership $z $DESTINATION/$MSGDATE/$MSGTIME/$(basename $z)
-		rm $z
-	done
+        find $MAILDIR/extracted/$i/* -type f \
+	  -execdir cp -v --no-preserve=mode,ownership "{}" "$DESTINATION/$MSGDATE/$MSGTIME/{}" \; \
+	  -exec rm "{}" \;
 
 	if [[ $DEBUG -eq 0 ]]; then
 		rm -fr $MAILDIR/extracted/$i/
