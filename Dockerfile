@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-MAINTAINER Chris Metcalf
+MAINTAINER Jens Willemsens
 
 VOLUME /var/mail /config /output
 
