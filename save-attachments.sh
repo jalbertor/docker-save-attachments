@@ -35,7 +35,7 @@ do
 	MSGTIME=$(date --date="$MSGTIMESTAMP" '+%H%M%S')
 	mkdir -p $DESTINATION/$MSGDATE/$MSGTIME
 	rm $MAILDIR/extracted/$i/$i
-        find $MAILDIR/extracted/$i/* -type f \
+    find $MAILDIR/extracted/$i/ -type f \
 	  -execdir cp -v --no-preserve=mode,ownership "{}" "$DESTINATION/$MSGDATE/$MSGTIME/{}" \; \
 	  -exec rm "{}" \;
 
