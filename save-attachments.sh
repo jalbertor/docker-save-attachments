@@ -9,7 +9,7 @@ echo "== $(date -Is) =="
 fetchmail
 
 # shuffle around some files to the working directory
-mv $MAILDIR/new/* $MAILDIR/landing/
+mv $MAILDIR/new/* $MAILDIR/landing/ > /dev/null 2>&1
 cd $MAILDIR/landing/
 
 # process each message in a loop
